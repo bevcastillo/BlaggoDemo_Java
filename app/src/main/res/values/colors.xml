@@ -10,5 +10,6 @@
 
     <color name="colorPrimary">#FFC107</color>
     <color name="colorPrimaryDark">#C79100</color>
+    <color name="colorBlue">#0645AD</color>
 
 </resources>
