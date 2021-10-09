@@ -25,17 +25,29 @@
         android:id="@+id/textView4"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginTop="@dimen/default_dimen"
         android:fontFamily="@font/extra_bold"
         android:text="Blaggo Demo App"
         android:textAllCaps="true"
         android:textColor="@color/black"
         android:textSize="@dimen/heading"
-        app:layout_constraintBottom_toTopOf="@+id/imageView4"
+        android:layout_marginTop="@dimen/dimen_20"
+        app:layout_constraintBottom_toTopOf="@+id/loadingPB"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.5"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/imageView" />
+
+    <ProgressBar
+        android:id="@+id/loadingPB"
+        android:layout_width="42dp"
+        android:layout_height="42dp"
+        android:layout_marginTop="@dimen/dimen_20"
+        android:indeterminate="true"
+        app:layout_constraintBottom_toTopOf="@+id/guideline"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.5"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/textView4" />
 
     <ImageView
         android:id="@+id/imageView4"
@@ -46,5 +58,12 @@
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent" />
+
+    <androidx.constraintlayout.widget.Guideline
+        android:id="@+id/guideline"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        app:layout_constraintGuide_end="100dp" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>

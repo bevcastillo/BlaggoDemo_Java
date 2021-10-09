@@ -1,6 +1,9 @@
 package com.beverlycastillo.blaggodemo.ui.viewmodel;
 
 import android.app.Application;
+import android.app.ProgressDialog;
+import android.content.Context;
+import android.widget.ProgressBar;
 
 import androidx.annotation.NonNull;
 import androidx.lifecycle.AndroidViewModel;
@@ -22,8 +25,8 @@ public class VersionViewModel extends AndroidViewModel {
         versionModelLiveData = versionRepository.getVersionModelLiveData();
     }
 
-    public void getVersion() {
-        versionRepository.getVersionData();
+    public void getVersion(ProgressBar progressBar) {
+        versionRepository.getVersionData(progressBar);
     }
 
     public LiveData<VersionModel> getVersionModelLiveData() {

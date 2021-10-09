@@ -1,5 +1,10 @@
 package com.beverlycastillo.blaggodemo.data.repository;
 
+import android.app.ProgressDialog;
+import android.content.Context;
+import android.view.View;
+import android.widget.ProgressBar;
+
 import androidx.lifecycle.LiveData;
 import androidx.lifecycle.MutableLiveData;
 
@@ -18,17 +23,7 @@ import retrofit2.converter.gson.GsonConverterFactory;
 public class VersionRepository {
     private VersionApi versionApi;
     private MutableLiveData<VersionModel> versionModelMutableLiveData;
-
-    public static Retrofit getRetrofitInstance() {
-        return new Retrofit.Builder()
-                .baseUrl(Url.BASE_URL)
-                .addConverterFactory(GsonConverterFactory.create())
-                .build();
-    }
-
-    public static VersionApi getVersionApiInstance() {
-        return getRetrofitInstance().create(VersionApi.class);
-    }
+    ProgressDialog progressDialog;
 
     public VersionRepository() {
         versionModelMutableLiveData = new MutableLiveData<>();
@@ -44,14 +39,19 @@ public class VersionRepository {
                 .create(VersionApi.class);
     }
 
-    public void getVersionData() {
+    public void getVersionData(ProgressBar progressBar) {
         versionApi.getVersionApi()
                 .enqueue(new Callback<VersionModel>() {
                     @Override
                     public void onResponse(Call<VersionModel> call, Response<VersionModel> response) {
-                        if (response.isSuccessful()) {
-                            if (response.body() != null) {
-                                versionModelMutableLiveData.postValue(response.body());
+                        if (response.isSuccessful() && response.body() != null) {
+                            versionModelMutableLiveData.postValue(response.body());
+                            if (progressBar!=null) {
+                                progressBar.setVisibility(View.GONE);
+                            }
+                        }else {
+                            if (progressBar!=null) {
+                                progressBar.setVisibility(View.VISIBLE);
                             }
                         }
                     }
