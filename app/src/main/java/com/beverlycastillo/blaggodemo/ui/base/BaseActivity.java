@@ -16,6 +16,10 @@ import org.jetbrains.annotations.NotNull;
 import butterknife.ButterKnife;
 import butterknife.Unbinder;
 
+/*
+    Created by Beverly Castillo on 10/9/2021
+*/
+
 public class BaseActivity extends AppCompatActivity {
     private Unbinder unbinder;
 

@@ -1,7 +1,6 @@
 package com.beverlycastillo.blaggodemo.data.repository;
 
 import android.app.ProgressDialog;
-import android.content.Context;
 import android.view.View;
 import android.widget.ProgressBar;
 
@@ -10,7 +9,7 @@ import androidx.lifecycle.MutableLiveData;
 
 import com.beverlycastillo.blaggodemo.data.Url;
 import com.beverlycastillo.blaggodemo.data.api.VersionApi;
-import com.beverlycastillo.blaggodemo.data.model.VersionModel;
+import com.beverlycastillo.blaggodemo.data.model.VersionResponse;
 
 import okhttp3.OkHttpClient;
 import okhttp3.logging.HttpLoggingInterceptor;
@@ -20,10 +19,13 @@ import retrofit2.Response;
 import retrofit2.Retrofit;
 import retrofit2.converter.gson.GsonConverterFactory;
 
+/*
+    Created by Beverly Castillo on 10/9/2021
+*/
+
 public class VersionRepository {
     private VersionApi versionApi;
-    private MutableLiveData<VersionModel> versionModelMutableLiveData;
-    ProgressDialog progressDialog;
+    private MutableLiveData<VersionResponse> versionModelMutableLiveData;
 
     public VersionRepository() {
         versionModelMutableLiveData = new MutableLiveData<>();
@@ -40,30 +42,29 @@ public class VersionRepository {
     }
 
     public void getVersionData(ProgressBar progressBar) {
-        versionApi.getVersionApi()
-                .enqueue(new Callback<VersionModel>() {
-                    @Override
-                    public void onResponse(Call<VersionModel> call, Response<VersionModel> response) {
-                        if (response.isSuccessful() && response.body() != null) {
-                            versionModelMutableLiveData.postValue(response.body());
-                            if (progressBar!=null) {
-                                progressBar.setVisibility(View.GONE);
-                            }
-                        }else {
-                            if (progressBar!=null) {
-                                progressBar.setVisibility(View.VISIBLE);
-                            }
-                        }
+        versionApi.getVersionApi().enqueue(new Callback<VersionResponse>() {
+            @Override
+            public void onResponse(Call<VersionResponse> call, Response<VersionResponse> response) {
+                if (response.isSuccessful() && response.body() != null) {
+                    versionModelMutableLiveData.postValue(response.body());
+                    if (progressBar!=null) {
+                        progressBar.setVisibility(View.GONE);
                     }
+                }else {
+                    if (progressBar!=null) {
+                        progressBar.setVisibility(View.VISIBLE);
+                    }
+                }
+            }
 
-                    @Override
-                    public void onFailure(Call<VersionModel> call, Throwable t) {
-                        versionModelMutableLiveData.postValue(null);
-                    }
-                });
+            @Override
+            public void onFailure(Call<VersionResponse> call, Throwable t) {
+                versionModelMutableLiveData.postValue(null);
+            }
+        });
     }
 
-    public LiveData<VersionModel> getVersionModelLiveData() {
+    public LiveData<VersionResponse> getVersionModelLiveData() {
         return versionModelMutableLiveData;
     }
 

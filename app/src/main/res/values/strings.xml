@@ -1,7 +1,14 @@
 <resources>
-    <string name="app_name">Blaggo Demo App</string>
+    <string name="app_name">Blaggo Demo Java</string>
+
+    <!--    main screen-->
     <string name="blaggo_desc"> Blaggo is a utility engagement app that lets utility providers offer a
         better customer experience. We work with your utility to give you the tools to better connect
         with your providers, resulting in a high level of customer satisfaction. </string>
     <string name="download_app">Download Blaggo App</string>
+    <string name="about_blaggo">About Blaggo</string>
+    <string name="version_info">Version Info</string>
+    <string name="build">Build Version</string>
+    <string name="url">URL Link</string>
+
 </resources>
